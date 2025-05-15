@@ -7,5 +7,5 @@ Täältä löytyvät tehtäväpalautukset:
 - [Viikko 4](vko4/index.html)
 - [Viikko 5 (Vite-sivu Matomo-keksillä)](vko5/index.html)
 - [Viikko 5 (Analytiikan hyödyntäminen)](vko5.md)
-- Viikko 6
-- Harjoitustyö
+- [Viikko 6](vko6/index.html)
+- [Harjoitustyö](harjoitustyo/index.html)
