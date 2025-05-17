@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Knit Helper</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Borel&family=Pacifico&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-3caxxPR7.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BaOB-mTa.css">
+</head>
+
+<body>
+
+  <!--Sivun Header-->
+  <div class="container-fluid accent2">
+    <br /><br />
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 class="pacifico-regular text-center">Knit Helper</h1>
+        <h2 class="h5 text-center">Check below if you can knit outside today!</h2>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+
+  <!--Body container-->
+  <div class="container">
+
+    <br /><br />
+
+    <!--Form function-->
+
+    <div class="text-center">
+
+      <button>Press me to see your city!</button>
+
+      <div id="greeting">
+        <script>
+          const button = document.querySelector("button");
+          function greet() {
+            const name = prompt("What is your city?");
+            const greeting = document.querySelector("#greeting");
+
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + name + '&appid=1d0fb7be50f949ae1ca6b5d4a04bd4e9&lang=en&units=metric')
+
+              // Muunnetaan vastaus JSON muotoon
+              .then(function (response) {
+                return response.json();
+
+              })
+              // Käsitellään muunnettu (eli JSON muotoinen) vastaus
+              .then(function (responseJson) {
+                // Kutsutaan funktiota ja välitetään sille json-vastaus 
+                saa(responseJson)
+              })
+              // Jos tuli jokin virhe
+              .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan </p>" + error;
+              })
+
+            function weather(data) {
+              var teksti = "";
+
+              teksti = teksti + "<p><img src=https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png></p>";
+              teksti = teksti + "<h2>" + data.name + "</h2>";
+              teksti = teksti + "<p>Weather: " + data.weather[0].description + "</p>";
+              teksti = teksti + "<p>Temperature: " + data.main.temp + " °C <br />(Feels like: " + data.main.feels_like + " °C)</p>";
+
+              // If-loopilla lämpötilan käsittely
+              if (data.main.temp < 10) {
+                teksti = teksti + "<br /><h3>It seems to be a little cold.</h3> <p>Wait for warmer weather so your fingers don't freeze.</p>";
+              }
+              else {
+                teksti = teksti + "<br /><h3>It's warm enough for knitting outside!</h3> <p>Go outside or on your balcony, if it doesn't rain. :)</p>";
+              }
+
+              document.getElementById("vastaus").innerHTML = teksti;
+            }
+
+          }
+
+          button.addEventListener("click", greet);
+
+        </script>
+      </div>
+    </div>
+
+    <br />
+
+    <!--Weather-->
+    <div class="accent1 rounded-4 m-1 p-4 text-center">
+      <div id="vastaus">
+        <script>
+          fetch('https://api.openweathermap.org/data/2.5/weather?q=Helsinki,246&appid=1d0fb7be50f949ae1ca6b5d4a04bd4e9&lang=en&units=metric')
+
+            // Muunnetaan vastaus JSON muotoon
+            .then(function (response) {
+              return response.json();
+
+            })
+            // Käsitellään muunnettu (eli JSON muotoinen) vastaus
+            .then(function (responseJson) {
+              // Kutsutaan funktiota ja välitetään sille json-vastaus 
+              saa(responseJson)
+            })
+            // Jos tuli jokin virhe
+            .catch(function (error) {
+              document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan </p>" + error;
+            })
+
+          function saa(data) {
+            var teksti = "";
+
+            teksti = teksti + "<p><img src=https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png></p>";
+            teksti = teksti + "<h2>" + data.name + "</h2>";
+            teksti = teksti + "<p>Weather: " + data.weather[0].description + "</p>";
+            teksti = teksti + "<p>Temperature: " + data.main.temp + " °C <br />(Feels like: " + data.main.feels_like + " °C)</p>";
+
+            // If-loopilla lämpötilan käsittely
+            if (data.main.temp < 10) {
+              teksti = teksti + "<br /><h3>It seems to be a little cold.</h3> <p>Wait for warmer weather so your fingers don't freeze.</p>";
+            }
+            else {
+              teksti = teksti + "<br /><h3>It's warm enough for knitting outside!</h3> <p>Go outside or on your balcony, if it doesn't rain. :)</p>";
+            }
+
+            document.getElementById("vastaus").innerHTML = teksti;
+          }
+        </script>
+      </div>
+    </div>
+
+    <br />
+
+    <!--Login-->
+    <div id="root"></div>
+
+    <br /><br />
+
+  </div>
+
+</body>
+
+<!--Sivun Footer-->
+<footer>
+
+  <div class="container-fluid accent1">
+
+    <br /><br />
+
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="pacifico-regular text-center">Knit Helper</h1>
+          <br />
+          <a class="nav-link text-center" href="#">Take me back to the top &uarr;</a>
+      </div>
+    </div>
+
+    <br /><br />
+
+  </div>
+
+</footer>
+
+</html>
